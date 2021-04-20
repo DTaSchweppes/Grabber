@@ -1,11 +1,11 @@
 import os
 import requests
-import xlrd
-import shutil
 from xlwtRe import ExcelWork, sheet2, sheet1
 from bs4 import BeautifulSoup as BS
 from urllib.request import urlretrieve
 from PIL import Image
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class GrabEng:
     files = []
@@ -15,6 +15,18 @@ class GrabEng:
         directory = path
         self.files = os.listdir(directory)
         print(self.files)
+
+
+    def check_input_path_file(self, text):
+        inp = False
+        while inp != True:
+            path = str(input(text))
+            if 'C:' not in path and 'D:' not in path:
+                print('ОШИБКА ВВОДА. Введите корректный путь к файлу (Начинается с C: или D:)')
+            else:
+                inp = True
+        return path
+
 
     def tdkomfort_price_grab(self):
         f = open('danfmarket.txt', encoding='UTF8')
@@ -268,3 +280,19 @@ class GrabEng:
         print('[УСПЕШНО] Программа завершена')
         pse = input()
 
+    def check_dwnd_images_in_price(self):
+        directory = os.path.dirname(os.path.abspath(__file__)) + '\\downloandedImages'
+        files = os.listdir(directory)
+        mas1 = []
+        i = 0
+        while i < len(files):
+            mas1.append(files[i].replace(".jpeg", "").replace(".jpg", ""))
+            i += 1
+        text ='Введите путь к файлу .txt с перечнем артикулов. Пример: C:\PycharmProjects\Grabber\zubr48grabber.txt'
+        path = self.check_input_path_file(text)
+        f = open(path, encoding='UTF8')
+        s = open('C:\\Users\\david\\PycharmProjects\\Grabber\\done.txt', "w")
+        for line in f:
+            name = line.replace("\n", "")
+            if name not in mas1:
+                s.write('\n' + name)

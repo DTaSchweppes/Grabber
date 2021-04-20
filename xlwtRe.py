@@ -1,8 +1,7 @@
 import xlwt
-import xlrd
 book = xlwt.Workbook(encoding="utf-8")
-sheet1 = book.add_sheet("Sheet 1",cell_overwrite_ok=True)
-sheet2 = book.add_sheet("Sheet 2",cell_overwrite_ok=True)
+sheet1 = book.add_sheet("Sheet 1", cell_overwrite_ok=True)
+sheet2 = book.add_sheet("Sheet 2", cell_overwrite_ok=True)
 
 
 class ExcelWork():

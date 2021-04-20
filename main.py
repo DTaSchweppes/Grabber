@@ -18,7 +18,8 @@ class GrabberMain():
         print('3. Сжать JPG изображения для меньшего размера файлов изображений')
         print('4. Анализ наименований товаров на Тип товара')
         print('5. Парсер с сайта https://www.dveriregionov.ru/')
-        print('6. Помощь по программе')
+        print('6. Перечислить недозагруженные граббером файлы')
+        print('7. Помощь по программе')
         i=False
         while i != True:
             change = int(input('Введите цифру(пункт меню) для запуска нужного процесса: '))
@@ -48,6 +49,10 @@ class GrabberMain():
                 i=True
             elif change ==6:
                 os.system("cls")
+                self.r1.check_dwnd_images_in_price()
+                i=True
+            elif change ==7:
+                os.system("cls")
                 self.help_menu()
                 i=True
             else:
@@ -75,6 +80,7 @@ class GrabberMain():
         print('3. Сжать JPG изображения для меньшего размера файлов изображений')
         print('4. Анализ наименований товаров на Тип товара')
         print('5. Парсер с сайта https://www.dveriregionov.ru/ ')
+        print('6. Перечислить недозагруженные граббером файлы')
         i = False
         change=''
         while change != 'exit':
@@ -111,6 +117,11 @@ class GrabberMain():
                 print('Собирает названия, цены, характеристики по товарам.')
                 print('Список артикулов не нужен, при старте нужно ввести ссылку на директорию в каталоге. Пример: https://www.dveriregionov.ru/catalog/metallicheskie_dveri/')
                 print('Выйти в главное меню: exit')
+            elif change =='6':
+                os.system("cls")
+                print('Информация о функции программы: Данная функция считает файлы по названию в папке \downloandedImages')
+                print('Затем берет txt файл со списком артикулов (артикулы строго построчны, например копия столбца из excel)')
+                print('Далее в файл done.txt сохраняет артикулы, изображения по каторым не были загружены граббером')
 
         self.menu_change()
 
@@ -121,5 +132,5 @@ class GrabberMain():
 
 
 app = GrabberMain()
-# 430 строк
+
 
